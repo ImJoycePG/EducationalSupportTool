@@ -11,7 +11,7 @@ Texture	treeTextureAr[5];
 bool LoadTreeTextures()
 {
 	int i;
-	if (LoadTGA(&treeTextureAr[0], (char*)"models/skybox/cielotextura.tga") &&
+	if (LoadTGA(&treeTextureAr[0], (char*)"models/skybox/skyTexture.tga") &&
 		LoadTGA(&treeTextureAr[1], (char*)"models/terrain/terrain.tga"))	{
 		for (i = 0; i < 5; i++) {
 			glGenTextures(1, &treeTextureAr[i].texID);
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
 	init();
 
 
-	skybox = glmReadOBJ((char*)"models/skybox/cielo01.obj");
+	skybox = glmReadOBJ((char*)"models/skybox/skybox.obj");
 	terrain = glmReadOBJ((char*)"models/terrain/terrain.obj");
 
 	glutDisplayFunc(graficar);
