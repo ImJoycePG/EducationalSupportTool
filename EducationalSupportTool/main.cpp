@@ -10,6 +10,7 @@ Faltaria:
    - Mouse
    - Niveles
    - Misiones
+   - Sonidos
 
  Github: https://github.com/ImJoycePG/EducationalSupportTool
 
@@ -31,6 +32,28 @@ GLuint	texture;
 Texture	treeScenaryTexture[2];
 Texture	treeCentaurTexture[1];
 Texture	treeAppleTexture[1];
+
+GLfloat CentaurPosX = -2;
+GLfloat CentaurPosY = -0.8;
+GLfloat CentaurAng = 90;
+
+GLfloat ApplePosX_1 = -1.0f;
+GLfloat ApplePosY_1 = -0.2f;
+
+GLfloat ApplePosX_2 = -0.4f;
+GLfloat ApplePosY_2 = -0.2f;
+
+GLfloat ApplePosX_3 = 0.2;
+GLfloat ApplePosY_3 = -0.2f;
+
+GLfloat ApplePosX_4 = 0.8;
+GLfloat ApplePosY_4 = -0.2f;
+
+GLfloat ApplePosX_5 = 1.4f;
+GLfloat ApplePosY_5 = -0.2f;
+
+GLfloat ApplePosX_6 = 2.0f;
+GLfloat ApplePosY_6 = -0.2f;
 
 
 bool loadScenaryTextures()
@@ -142,9 +165,9 @@ void myGlutScenary() {
 
 void myGlutCentaur() {
 	glPushMatrix();
-	glTranslatef(-2, -0.8, 0.4);
+	glTranslatef(CentaurPosX, CentaurPosY, 0.4);
 	glScalef(0.3, 0.3, 0.3);
-	glRotatef(90, 0, 1, 0);
+	glRotatef(CentaurAng, 0, 1, 0);
 	glBindTexture(GL_TEXTURE_2D, treeCentaurTexture[0].texID);
 	glmDraw(centaur, GLM_SMOOTH | GLM_TEXTURE);
 	glPopMatrix();
@@ -153,7 +176,7 @@ void myGlutCentaur() {
 
 void myGlutApples() {
 	glPushMatrix();
-	glTranslatef(-1, -0.2,0.4);
+	glTranslatef(ApplePosX_1, ApplePosY_1, 0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -161,7 +184,7 @@ void myGlutApples() {
 	glPopMatrix();
 	
 	glPushMatrix();
-	glTranslatef(-0.4, -0.2, 0.4);
+	glTranslatef(ApplePosX_2, ApplePosY_2, 0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -169,7 +192,7 @@ void myGlutApples() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(0.2, -0.2, 0.4);
+	glTranslatef(ApplePosX_3, ApplePosY_3, 0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -177,7 +200,7 @@ void myGlutApples() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(0.8, -0.2, 0.4);
+	glTranslatef(ApplePosX_4, ApplePosY_4, 0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -185,7 +208,7 @@ void myGlutApples() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(1.4, -0.2, 0.4);
+	glTranslatef(ApplePosX_5, ApplePosY_5, 0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -193,7 +216,7 @@ void myGlutApples() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(2, -0.2, 0.4);
+	glTranslatef(ApplePosX_6, ApplePosX_6, 0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -225,14 +248,66 @@ void myGlutReshape(int w, int h)
 	gluPerspective(45.0, (GLfloat)w / (GLfloat)h, 1.0, 500.0);
 }
 
-void animationApple(int) {
+void myGlutUpdate() {
+	angApple += 5;
+
+	if (abs(CentaurPosX - ApplePosX_1) + abs(CentaurPosY - ApplePosY_1) < 0.95) {
+		ApplePosY_1 = 100;
+	}
+
+	if (abs(CentaurPosX - ApplePosX_2) + abs(CentaurPosY - ApplePosY_2) < 0.95) {
+		ApplePosY_2 = 100;
+	}
+	if (abs(CentaurPosX - ApplePosX_3) + abs(CentaurPosY - ApplePosY_3) < 0.95) {
+		ApplePosY_3 = 100;
+	}
+	if (abs(CentaurPosX - ApplePosX_4) + abs(CentaurPosY - ApplePosY_4) < 0.95) {
+		ApplePosY_4 = 100;
+	}
+	if (abs(CentaurPosX - ApplePosX_5) + abs(CentaurPosY - ApplePosY_5) < 0.95) {
+		ApplePosY_5 = 100;
+	}
+	if (abs(CentaurPosX - ApplePosX_6) + abs(CentaurPosY - ApplePosY_6) < 0.95) {
+		ApplePosY_6 = 100;
+	}
+	
 	glutPostRedisplay();
-	glutTimerFunc(1000 / 60, animationApple, 0);
+}
 
-	angApple += 1;
+void myGlutKeyboard(unsigned char key, int x, int y) {
+	switch (key) {
+	case 'd': 
+		CentaurPosX += 0.014;
+		CentaurAng = 90;
+		break;
+	case 'a':
+		CentaurPosX -= 0.014;
+		CentaurAng = -90;
+		break;
 
-	if (angApple > 360)
-		angApple = angApple - 360;
+
+	case 'r':
+		CentaurPosX = -2;
+		CentaurAng = 90;
+		ApplePosX_1 = -1.0f;
+		ApplePosY_1 = -0.2f;
+
+		ApplePosX_2 = -0.4f;
+		ApplePosY_2 = -0.2f;
+
+		ApplePosX_3 = 0.2;
+		ApplePosY_3 = -0.2f;
+
+		ApplePosX_4 = 0.8;
+		ApplePosY_4 = -0.2f;
+
+		ApplePosX_5 = 1.4f;
+		ApplePosY_5 = -0.2f;
+
+		ApplePosX_6 = 2.0f;
+		ApplePosY_6 = -0.2f;
+		break;
+	}
 }
 
 int main(int argc, char** argv)
@@ -246,7 +321,8 @@ int main(int argc, char** argv)
 
 	glutDisplayFunc(myGlutDisplay);
 	glutReshapeFunc(myGlutReshape);
-	glutTimerFunc(0, animationApple, 0);
+	glutKeyboardFunc(myGlutKeyboard);
+	glutIdleFunc(myGlutUpdate);
 
 	glewInit();
 	init();
