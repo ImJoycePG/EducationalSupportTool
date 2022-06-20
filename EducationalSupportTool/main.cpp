@@ -7,7 +7,9 @@ Faltaria:
    - Diferentes personajes para seleccionar
    - Animaciones para el personaje
  - Mecanicas
- - Más niveles
+   - Mouse
+   - Niveles
+   - Misiones
 
  Github: https://github.com/ImJoycePG/EducationalSupportTool
 
