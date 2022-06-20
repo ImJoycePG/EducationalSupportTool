@@ -153,7 +153,7 @@ void myGlutCentaur() {
 
 void myGlutApples() {
 	glPushMatrix();
-	glTranslatef(appleX, appleY,0.4);
+	glTranslatef(-1, -0.2,0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
