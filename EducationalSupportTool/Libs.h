@@ -22,11 +22,9 @@
 #include <gl/glut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <stb_image.h>
 
 #include "Texture.h"
 #include "glm.h"
-#include "stdafx.h"
 
 
 using namespace std;
