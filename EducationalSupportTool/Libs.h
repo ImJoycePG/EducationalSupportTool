@@ -22,6 +22,7 @@
 #include <gl/glut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <GL/glui.h>
 
 #include "Texture.h"
 #include "glm.h"

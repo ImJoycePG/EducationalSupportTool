@@ -1,6 +1,6 @@
 #include "Libs.h"
 
-static float ypoz = 0, zpoz = 0;
+static float ypoz = 0;
 
 GLMmodel* skybox = NULL;
 GLMmodel * terrain = NULL;
