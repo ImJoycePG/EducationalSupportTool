@@ -10,7 +10,7 @@ Faltaria:
    - Mouse
    - Niveles
    - Misiones
-   - Sonidos
+   - Efectos de sonido
 
  Github: https://github.com/ImJoycePG/EducationalSupportTool
 
