@@ -4,10 +4,10 @@
 
 Faltaria:
  - Interfaces
+   - Diferentes personajes para seleccionar
+   - Animaciones para el personaje
  - Mecanicas
  - Más niveles
- - Diferentes personajes
- - Animaciones
 
  Github: https://github.com/ImJoycePG/EducationalSupportTool
 
@@ -17,6 +17,7 @@ static float ypoz = 0;
 
 int main_window;
 int angApple = 0;
+
 
 GLMmodel* skybox = NULL;
 GLMmodel * terrain = NULL;
@@ -28,6 +29,7 @@ GLuint	texture;
 Texture	treeScenaryTexture[2];
 Texture	treeCentaurTexture[1];
 Texture	treeAppleTexture[1];
+
 
 bool loadScenaryTextures()
 {
@@ -149,7 +151,7 @@ void myGlutCentaur() {
 
 void myGlutApples() {
 	glPushMatrix();
-	glTranslatef(-1, -0.2,0.4);
+	glTranslatef(appleX, appleY,0.4);
 	glRotatef(angApple, 0, 1, 0);
 	glScalef(0.002, 0.002, 0.002);
 	glBindTexture(GL_TEXTURE_2D, treeAppleTexture[0].texID);
@@ -230,7 +232,6 @@ void animationApple(int) {
 	if (angApple > 360)
 		angApple = angApple - 360;
 }
-
 
 int main(int argc, char** argv)
 {
