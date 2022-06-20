@@ -11,7 +11,7 @@ Texture	treeTextureAr[5];
 bool LoadTreeTextures()
 {
 	int i;
-	if (LoadTGA(&treeTextureAr[0], (char*)"models/skybox/skyTexture.tga") &&
+	if (LoadTGA(&treeTextureAr[0], (char*)"models/skybox/skyTextures.tga") &&
 		LoadTGA(&treeTextureAr[1], (char*)"models/terrain/terrain.tga"))	{
 		for (i = 0; i < 5; i++) {
 			glGenTextures(1, &treeTextureAr[i].texID);
