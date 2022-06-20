@@ -9,7 +9,6 @@ We are a group from the Universidad Privada del Norte that is developing a tool 
 - **FREEGLUT:** https://www.transmissionzero.co.uk/software/freeglut-devel/
 - **GLEW:** http://glew.sourceforge.net/
 - **GLM:** https://github.com/g-truc/glm
-- **STB:** https://github.com/nothings/stb
 
 <h1 align="left"> How to import libraries </h1>
 
