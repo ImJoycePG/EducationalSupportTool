@@ -24,6 +24,7 @@ int angApple = 0;
 
 GLMmodel* skybox = NULL;
 GLMmodel * terrain = NULL;
+GLMmodel* tree = NULL;
 
 GLMmodel * centaur = NULL;
 GLMmodel * apple1 = NULL;
@@ -32,6 +33,7 @@ GLuint	texture;
 Texture	treeScenaryTexture[2];
 Texture	treeCentaurTexture[1];
 Texture	treeAppleTexture[1];
+Texture	treeTreeTexture[1];
 
 GLfloat CentaurPosX = -2;
 GLfloat CentaurPosY = -0.8;
@@ -138,10 +140,37 @@ bool loadAppleTexture()
 	}
 }
 
+bool loadTreeTexture(){
+	int i;
+	if (LoadTGA(&treeTreeTexture[0], (char*)"models/tree/orcmale_Body.tga")) {
+		for (i = 0; i < 1; i++) {
+			glGenTextures(1, &treeTreeTexture[i].texID);
+			glBindTexture(GL_TEXTURE_2D, treeTreeTexture[i].texID);
+			glTexImage2D(GL_TEXTURE_2D, 0, treeTreeTexture[i].bpp / 8, treeTreeTexture[i].width,
+				treeTreeTexture[i].height, 0, treeTreeTexture[i].type, GL_UNSIGNED_BYTE,
+				treeTreeTexture[i].imageData);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glEnable(GL_TEXTURE_2D);
+			if (treeTreeTexture[i].imageData)
+			{
+				free(treeTreeTexture[i].imageData);
+			}
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void init(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	loadScenaryTextures();
+	loadTreeTexture();
 	loadCentaurTexture();
 	loadAppleTexture();
 	glEnable(GL_DEPTH_TEST);
@@ -224,6 +253,43 @@ void myGlutApples() {
 	glPopMatrix();
 }
 
+void myGlutTree() {
+	glPushMatrix();
+	glTranslatef(-8, -1.8, -10);
+	glScalef(0.3, 0.3, 0.3);
+	glBindTexture(GL_TEXTURE_2D, treeTreeTexture[0].texID);
+	glmDraw(tree, GLM_SMOOTH | GLM_TEXTURE);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-4, -1.8, -10);
+	glScalef(0.3, 0.3, 0.3);
+	glBindTexture(GL_TEXTURE_2D, treeTreeTexture[0].texID);
+	glmDraw(tree, GLM_SMOOTH | GLM_TEXTURE);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-0, -1.8, -10);
+	glScalef(0.3, 0.3, 0.3);
+	glBindTexture(GL_TEXTURE_2D, treeTreeTexture[0].texID);
+	glmDraw(tree, GLM_SMOOTH | GLM_TEXTURE);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(4, -1.8, -10);
+	glScalef(0.3, 0.3, 0.3);
+	glBindTexture(GL_TEXTURE_2D, treeTreeTexture[0].texID);
+	glmDraw(tree, GLM_SMOOTH | GLM_TEXTURE);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(8, -2, -10);
+	glScalef(0.3, 0.3, 0.3);
+	glBindTexture(GL_TEXTURE_2D, treeTreeTexture[0].texID);
+	glmDraw(tree, GLM_SMOOTH | GLM_TEXTURE);
+	glPopMatrix();
+}
+
 void myGlutDisplay(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -233,6 +299,7 @@ void myGlutDisplay(void)
 	gluLookAt(0.0, 0.0, 4.0, 0.0, 0.0, 0.0, 0.0f, 1.0f, 0.0f);
 
 	myGlutScenary();
+	myGlutTree();
 	myGlutCentaur();
 	
 	myGlutApples();
@@ -277,11 +344,11 @@ void myGlutUpdate() {
 void myGlutKeyboard(unsigned char key, int x, int y) {
 	switch (key) {
 	case 'd': 
-		CentaurPosX += 0.014;
+		CentaurPosX += 0.018;
 		CentaurAng = 90;
 		break;
 	case 'a':
-		CentaurPosX -= 0.014;
+		CentaurPosX -= 0.018;
 		CentaurAng = -90;
 		break;
 
@@ -317,7 +384,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(1920, 1080);
 	glutInitWindowPosition(0, 0);
 
-	main_window = glutCreateWindow("EducationalSupportTool - Projecto Final");
+	main_window = glutCreateWindow("EducationalSupportTool - Projecto Final - Progress: 70%");
 
 	glutDisplayFunc(myGlutDisplay);
 	glutReshapeFunc(myGlutReshape);
@@ -329,6 +396,7 @@ int main(int argc, char** argv)
 
 	skybox = glmReadOBJ((char*)"models/skybox/skybox.obj");
 	terrain = glmReadOBJ((char*)"models/terrain/terrain.obj");
+	tree = glmReadOBJ((char*)"models/tree/tree.obj");
 	centaur = glmReadOBJ((char*)"models/centaur/centaurwarrior.obj");
 	apple1 = glmReadOBJ((char*)"models/Apple/Apple.obj");
 
