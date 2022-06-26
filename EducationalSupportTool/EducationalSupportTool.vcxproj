@@ -133,14 +133,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bmp.cpp" />
+    <ClCompile Include="ctexture.cpp" />
     <ClCompile Include="glm.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="md2.cpp" />
+    <ClCompile Include="pcx.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="tga.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="anorms.h" />
+    <ClInclude Include="anormtab.h" />
+    <ClInclude Include="bmp.h" />
+    <ClInclude Include="ctexture.h" />
     <ClInclude Include="glm.h" />
     <ClInclude Include="Libs.h" />
+    <ClInclude Include="md2.h" />
+    <ClInclude Include="pcx.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="tga.h" />
+    <ClInclude Include="timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
