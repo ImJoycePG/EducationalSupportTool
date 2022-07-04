@@ -48,11 +48,20 @@ To import the libraries follow these steps:
 
 ![image](https://user-images.githubusercontent.com/104446699/174504233-dd64d4a8-39b4-426b-8788-2d2d623e9cde.png)
 
-Solution:
+**Solution:**
 
-Add _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING to Preprocessor definitions.
+Add _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING, _ITERATOR_DEBUG_LEVEL=0 to Preprocessor definitions.
 
 Project -> Properties -> C/C++ -> Preprocessor -> Preprocessor Definitions.
+
+![image](https://user-images.githubusercontent.com/104446699/177203484-89ac1852-e97d-469c-958b-26603cc17a7e.png)
+
+**Solution:**
+
+![image](https://user-images.githubusercontent.com/104446699/177203503-74685ed5-5373-4e88-a9ad-3ee6a89df22a.png)
+
+Change Debug to Release.
+
 
 This solved the issue for me.
 
