@@ -13,6 +13,7 @@ static float ypoz = 0;
 
 int main_window;
 int genID = 1;
+int contNivel = 0;
 
 
 
@@ -130,6 +131,10 @@ Texture treeTreeSceneTexture[1];
 
 //Variable GLUI
 GLUI* glui;
+GLUI* gluiCongrulation;
+GLUI* gluiFail;
+GLUI* gluiSumaLvL1;
+GLUI* gluiRestaLvL1;
 GLUI_Panel* obj_panel;
 
 bool loadScenaryTextures() {
@@ -527,6 +532,103 @@ void myGlutUpdate() {
 
 	glutPostRedisplay();
 }
+
+void myControl_Button(int button) {
+	if (button == 0) {
+		gluiCongrulation->close();
+	}
+	if (button == 1) {
+		gluiFail->close();
+	}
+	if (button == 2) {
+		gluiFail->close();
+	}
+	if (button == 3) {
+		gluiFail->close();
+	}
+}
+
+void myControl_SumaLvL1(int control) {
+	switch (control)
+	{
+	case 0:
+		gluiSumaLvL1->close();
+		gluiCongrulation = GLUI_Master.create_glui("Felicidades!", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiCongrulation->add_statictext("Felicidades, acabas de resolver bien la suma, sigue así!");
+		gluiCongrulation->add_statictext(" ");
+		gluiCongrulation->add_button("Aceptar", 0, myControl_Button);
+		break;
+
+	case 1:
+		gluiSumaLvL1->close();
+		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_button("Aceptar", 1, myControl_Button);
+		break;
+
+	case 2:
+		gluiSumaLvL1->close();
+		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_button("Aceptar", 2, myControl_Button);
+		
+	case 3:
+		gluiSumaLvL1->close();
+		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_button("Aceptar", 3, myControl_Button);
+		break;
+	}
+}
+
+void myControl_RestaLvL1(int control) {
+	switch (control)
+	{
+	case 0:
+		gluiRestaLvL1->close();
+		gluiCongrulation = GLUI_Master.create_glui("Felicidades!", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiCongrulation->add_statictext("Felicidades, acabas de resolver bien la resta, sigue así!");
+		gluiCongrulation->add_statictext(" ");
+		gluiCongrulation->add_button("Aceptar", 0, myControl_Button);
+		break;
+
+	case 1:
+		gluiRestaLvL1->close();
+		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_button("Aceptar", 1, myControl_Button);
+		break;
+
+	case 2:
+		gluiRestaLvL1->close();
+		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_button("Aceptar", 2, myControl_Button);
+
+	case 3:
+		gluiRestaLvL1->close();
+		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
+		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_button("Aceptar", 3, myControl_Button);
+		break;
+	}
+}
+
+
 void myGlutKeyboard(int key, int x, int y) {
 	switch (key) {
 	case GLUT_KEY_UP:
@@ -543,6 +645,21 @@ void myGlutKeyboard(int key, int x, int y) {
 
 		if (abs(PersonaTorsoX - AmongUsX) + abs(PersonaTorsoY - AmongUsY) + abs(PersonaTorsoZ - AmongUsZ) < 3.0f) {
 
+			gluiSumaLvL1 = GLUI_Master.create_glui("Mision: Suma", 0, 800, 400);
+			gluiSumaLvL1->add_statictext("Bienvenid@ a la mision de SUMA. Debes seleccionar el boton");
+			gluiSumaLvL1->add_statictext("que contiene la respuesta correcta sino perderás contra");
+			gluiSumaLvL1->add_statictext("el villano mas temido, el Astronauta.");
+			gluiSumaLvL1->add_statictext("");
+			gluiSumaLvL1->add_separator();
+			gluiSumaLvL1->add_statictext("Suma: 5 + 5");
+			gluiSumaLvL1->add_button("10", 0, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("5", 1, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("2", 2, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("8", 3, myControl_SumaLvL1);
+			
+			
+			gluiSumaLvL1->set_main_gfx_window(main_window);
+
 			PersonaTorsoZ -= 1;
 			PersonaTorsoAngle = 0;
 			CameraZ -= 1;
@@ -550,6 +667,22 @@ void myGlutKeyboard(int key, int x, int y) {
 		}
 
 		if (abs(PersonaTorsoX - FallGuysX) + abs(PersonaTorsoY - FallGuysY) + abs(PersonaTorsoZ - FallGuysZ) < 3.0f) {
+			gluiRestaLvL1 = GLUI_Master.create_glui("Mision: Resta", 0, 800, 400);
+			gluiRestaLvL1->add_statictext("Bienvenid@ a la mision de SUMA. Debes seleccionar el boton");
+			gluiRestaLvL1->add_statictext("que contiene la respuesta correcta sino perderás contra");
+			gluiRestaLvL1->add_statictext("el villano mas temido, el Muñeco de Goma.");
+			gluiRestaLvL1->add_statictext("");
+			gluiRestaLvL1->add_separator();
+			gluiRestaLvL1->add_statictext("Resta: 8 - 4");
+			gluiRestaLvL1->add_button("4", 0, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("7", 1, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("84", 2, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("48", 3, myControl_RestaLvL1);
+
+
+			gluiRestaLvL1->set_main_gfx_window(main_window);
+			
+			
 			PersonaTorsoZ -= 1;
 			PersonaTorsoAngle = 0;
 			CameraZ -= 1;
@@ -593,6 +726,22 @@ void myGlutKeyboard(int key, int x, int y) {
 		PersonaPiernaDerAngle = PersonaPiernaDerAngle + PersonaPiernaDerLimit;
 
 		if (abs(PersonaTorsoX - AmongUsX) + abs(PersonaTorsoY - AmongUsY) + abs(PersonaTorsoZ - AmongUsZ) < 3.0f) {
+			
+			gluiSumaLvL1 = GLUI_Master.create_glui("Mision: Suma", 0, 800, 400);
+			gluiSumaLvL1->add_statictext("Bienvenid@ a la mision de SUMA. Debes seleccionar el boton");
+			gluiSumaLvL1->add_statictext("que contiene la respuesta correcta sino perderás contra");
+			gluiSumaLvL1->add_statictext("el villano mas temido, el Astronauta.");
+			gluiSumaLvL1->add_statictext("");
+			gluiSumaLvL1->add_separator();
+			gluiSumaLvL1->add_statictext("Suma: 5 + 5");
+			gluiSumaLvL1->add_button("10", 0, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("5", 1, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("2", 2, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("8", 3, myControl_SumaLvL1);
+
+
+			gluiSumaLvL1->set_main_gfx_window(main_window);
+			
 			PersonaTorsoX -= 1;
 			PersonaTorsoAngle = 90;
 			CameraX -= 1;
@@ -600,6 +749,22 @@ void myGlutKeyboard(int key, int x, int y) {
 		}
 
 		if (abs(PersonaTorsoX - FallGuysX) + abs(PersonaTorsoY - FallGuysY) + abs(PersonaTorsoZ - FallGuysZ) < 3.0f) {
+			gluiRestaLvL1 = GLUI_Master.create_glui("Mision: Resta", 0, 800, 400);
+			gluiRestaLvL1->add_statictext("Bienvenid@ a la mision de SUMA. Debes seleccionar el boton");
+			gluiRestaLvL1->add_statictext("que contiene la respuesta correcta sino perderás contra");
+			gluiRestaLvL1->add_statictext("el villano mas temido, el Muñeco de Goma.");
+			gluiRestaLvL1->add_statictext("");
+			gluiRestaLvL1->add_separator();
+			gluiRestaLvL1->add_statictext("Resta: 8 - 4");
+			gluiRestaLvL1->add_button("4", 0, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("7", 1, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("84", 2, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("48", 3, myControl_RestaLvL1);
+
+
+			gluiRestaLvL1->set_main_gfx_window(main_window);
+			
+			
 			PersonaTorsoX -= 1;
 			PersonaTorsoAngle = 90;
 			CameraX -= 1;
@@ -624,6 +789,22 @@ void myGlutKeyboard(int key, int x, int y) {
 		PersonaPiernaDerAngle = PersonaPiernaDerAngle + PersonaPiernaDerLimit;
 
 		if (abs(PersonaTorsoX - AmongUsX) + abs(PersonaTorsoY - AmongUsY) + abs(PersonaTorsoZ - AmongUsZ) < 3.0f) {
+			gluiSumaLvL1 = GLUI_Master.create_glui("Mision: Suma", 0, 800, 400);
+			gluiSumaLvL1->add_statictext("Bienvenid@ a la mision de SUMA. Debes seleccionar el boton");
+			gluiSumaLvL1->add_statictext("que contiene la respuesta correcta sino perderás contra");
+			gluiSumaLvL1->add_statictext("el villano mas temido, el Astronauta.");
+			gluiSumaLvL1->add_statictext("");
+			gluiSumaLvL1->add_separator();
+			gluiSumaLvL1->add_statictext("Suma: 5 + 5");
+			gluiSumaLvL1->add_button("10", 0, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("5", 1, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("2", 2, myControl_SumaLvL1);
+			gluiSumaLvL1->add_button("8", 3, myControl_SumaLvL1);
+
+
+			gluiSumaLvL1->set_main_gfx_window(main_window);
+			
+			
 			PersonaTorsoX += 1;
 			PersonaTorsoAngle = -90;
 			CameraX += 1;
@@ -631,6 +812,22 @@ void myGlutKeyboard(int key, int x, int y) {
 		}
 
 		if (abs(PersonaTorsoX - FallGuysX) + abs(PersonaTorsoY - FallGuysY) + abs(PersonaTorsoZ - FallGuysZ) < 3.0f) {
+			
+			gluiRestaLvL1 = GLUI_Master.create_glui("Mision: Resta", 0, 800, 400);
+			gluiRestaLvL1->add_statictext("Bienvenid@ a la mision de SUMA. Debes seleccionar el boton");
+			gluiRestaLvL1->add_statictext("que contiene la respuesta correcta sino perderás contra");
+			gluiRestaLvL1->add_statictext("el villano mas temido, el Muñeco de Goma.");
+			gluiRestaLvL1->add_statictext("");
+			gluiRestaLvL1->add_separator();
+			gluiRestaLvL1->add_statictext("Resta: 8 - 4");
+			gluiRestaLvL1->add_button("4", 0, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("7", 1, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("84", 2, myControl_RestaLvL1);
+			gluiRestaLvL1->add_button("48", 3, myControl_RestaLvL1);
+
+
+			gluiRestaLvL1->set_main_gfx_window(main_window);
+			
 			PersonaTorsoX += 1;
 			PersonaTorsoAngle = -90;
 			CameraX += 1;
@@ -644,6 +841,7 @@ void myGlutKeyboard(int key, int x, int y) {
 		break;
 	}
 }
+
 void myControl_CB(int control) {
 	if (control == 0) {
 		genID = 0;
@@ -651,8 +849,6 @@ void myControl_CB(int control) {
 	if (control == 1) {
 		genID = 1;
 	}
-
-	//myGlutPerson();
 }
 
 int main(int argc, char** argv) {
