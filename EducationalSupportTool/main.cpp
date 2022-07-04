@@ -1,7 +1,9 @@
+
+
 #include <iomanip>
 #include "Libs.h"
 
-#include <GL/glui.h>
+#include "GL/glui.h"
 
 #include "ctexture.h"
 #include "timer.h"
@@ -10,6 +12,8 @@
 static float ypoz = 0;
 
 int main_window;
+int genID = 1;
+
 
 
 //Cords Personaje Principal
@@ -92,7 +96,6 @@ float SkyBoxZ = 0;
 float SkyBoxAngel = 90;
 
 
-
 //Modelo GLM - OBJ
 GLMmodel* skybox = NULL;
 GLMmodel* terrain = NULL;
@@ -120,10 +123,14 @@ GLMmodel* fallguys = NULL;
 GLMmodel* tree = NULL;
 
 Texture	treeScenaryTexture[2];
-Texture	treePersontexture[1];
+Texture	treePersontexture[2];
 Texture	treeAmongtexture[1];
 Texture	treeFallGuystexture[1];
 Texture treeTreeSceneTexture[1];
+
+//Variable GLUI
+GLUI* glui;
+GLUI_Panel* obj_panel;
 
 bool loadScenaryTextures() {
 	int i;
@@ -153,8 +160,9 @@ bool loadScenaryTextures() {
 }
 bool loadPersonTextures() {
 	int i;
-	if (LoadTGA(&treePersontexture[0], (char*)"models/boys/personaje.tga")) {
-		for (i = 0; i < 1; i++) {
+	if (LoadTGA(&treePersontexture[0], (char*)"models/boys/personaje.tga") && 
+		LoadTGA(&treePersontexture[1], (char*)"models/boys/DIDITEXTURE.tga")) {
+		for (i = 0; i < 3; i++) {
 			glGenTextures(1, &treePersontexture[i].texID);
 			glBindTexture(GL_TEXTURE_2D, treePersontexture[i].texID);
 			glTexImage2D(GL_TEXTURE_2D, 0, treePersontexture[i].bpp / 8, treePersontexture[i].width,
@@ -292,13 +300,13 @@ void myGlutPerson() {
 	glPushMatrix();
 	glTranslatef(PersonaTorsoX, PersonaTorsoY, PersonaTorsoZ);
 	glRotatef(PersonaTorsoAngle, 0, 1, 0);
-	glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+	glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 	glmDraw(personCuerpo, GLM_SMOOTH | GLM_TEXTURE);
 
 		//Cabeza
 		glPushMatrix();
 		glTranslatef(PersonaCabezaX, PersonaCabezaY, PersonaCabezaZ);
-		glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+		glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 		glmDraw(personCabeza, GLM_SMOOTH | GLM_TEXTURE);
 		glPopMatrix();
 
@@ -306,17 +314,17 @@ void myGlutPerson() {
 		glPushMatrix();
 		glTranslatef(PersonaBrazoIzqX, PersonaBrazoIzqY, PersonaBrazoIzqZ);
 		glRotatef(PersonaBrazoIzqAngle, 1, 0, 0);
-		glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+		glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 		glmDraw(personBrazoIzq, GLM_SMOOTH | GLM_TEXTURE);
 
 			//Brazo Izq - AnteBrazo
 			glPushMatrix();
-			glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+			glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 			glmDraw(personAnteBrazoIzq, GLM_SMOOTH | GLM_TEXTURE);
 	
 				//Brazo Izq - Mano
 				glPushMatrix();
-				glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+				glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 				glmDraw(personBrazoManoIzq, GLM_SMOOTH | GLM_TEXTURE);
 				glPopMatrix();
 			glPopMatrix();
@@ -326,17 +334,17 @@ void myGlutPerson() {
 		glPushMatrix();
 		glTranslatef(PersonaBrazoDerX, PersonaBrazoDerY, PersonaBrazoDerZ);
 		glRotatef(PersonaBrazoIzqAngle, 1, 0, 0);
-		glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+		glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 		glmDraw(personBrazoDer, GLM_SMOOTH | GLM_TEXTURE);
 
 		//Brazo Derecho - AnteBrazo
 			glPushMatrix();
-			glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+			glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 			glmDraw(personAnteBrazoDer, GLM_SMOOTH | GLM_TEXTURE);
 
 		//Brazo Derecho - Mano
 				glPushMatrix();
-				glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+				glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 				glmDraw(personBrazoManoDer, GLM_SMOOTH | GLM_TEXTURE);
 				glPopMatrix();
 			glPopMatrix();
@@ -345,19 +353,19 @@ void myGlutPerson() {
 		//Muslos
 		glPushMatrix();
 		glTranslatef(PersonaMuslosX, PersonaMuslosY, PersonaMuslosZ);
-		glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+		glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 		glmDraw(personMuslos, GLM_SMOOTH | GLM_TEXTURE);
 			//Pierna Izquierda
 			glPushMatrix();
 			glTranslatef(PersonaPiernaIzqX, PersonaPiernaIzqY, PersonaPiernaIzqZ);
 			glRotatef(PersonaPiernaIzqAngle, 1, 0, 0);
-			glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+			glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 			glmDraw(personPiernaIzq, GLM_SMOOTH | GLM_TEXTURE);
 
 				//Pie Izquierda
 				glPushMatrix();
 				glTranslatef(PersonaPieIzqX, PersonaPieIzqY, PersonaPieIzqZ);
-				glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+				glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 				glmDraw(personPieIzq, GLM_SMOOTH | GLM_TEXTURE);
 				glPopMatrix();
 			glPopMatrix();
@@ -366,13 +374,13 @@ void myGlutPerson() {
 			glPushMatrix();
 			glTranslatef(PersonaPiernaDerX, PersonaPiernaDerY, PersonaPiernaDerZ);
 			glRotatef(PersonaPiernaDerAngle, 1, 0, 0);
-			glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+			glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 			glmDraw(personPiernaDer, GLM_SMOOTH | GLM_TEXTURE);
 
 				//Pie Derecha
 				glPushMatrix();
 				glTranslatef(PersonaPieDerX, PersonaPieDerY, PersonaPieDerZ);
-				glBindTexture(GL_TEXTURE_2D, treePersontexture[0].texID);
+				glBindTexture(GL_TEXTURE_2D, treePersontexture[genID].texID);
 				glmDraw(personPieDer, GLM_SMOOTH | GLM_TEXTURE);
 				glPopMatrix();
 			glPopMatrix();
@@ -636,6 +644,16 @@ void myGlutKeyboard(int key, int x, int y) {
 		break;
 	}
 }
+void myControl_CB(int control) {
+	if (control == 0) {
+		genID = 0;
+	}
+	if (control == 1) {
+		genID = 1;
+	}
+
+	//myGlutPerson();
+}
 
 int main(int argc, char** argv) {
 
@@ -648,6 +666,23 @@ int main(int argc, char** argv) {
 
 	glewInit();
 	init();
+
+	glui = GLUI_Master.create_glui_subwindow(main_window, GLUI_SUBWINDOW_RIGHT);
+	glui->add_statictext("¡Bienvenido Alumn@!");
+	glui->add_statictext("Esto es una herramienta de soporte");
+	glui->add_statictext("para alumnos de inicial.");
+	glui->add_statictext(" ");
+	glui->add_separator();
+	glui->add_statictext("Elige tu genero:");
+	GLUI_Panel* skins = new GLUI_Panel(glui, "", 1);
+	obj_panel = new GLUI_Panel(skins, "Elige tu disfraz:");
+	glui->add_button_to_panel(skins, "-> Alumno <-", 0, myControl_CB);
+	glui->add_button_to_panel(skins, "-> Alumna <-", 1, myControl_CB);
+	glui->add_separator();
+
+
+	glui->set_main_gfx_window(main_window);
+	GLUI_Master.set_glutIdleFunc(myGlutUpdate);
 
 	glutReshapeFunc(myGlutReshape);
 	glutDisplayFunc(myGlutDisplay);
@@ -677,6 +712,8 @@ int main(int argc, char** argv) {
 	amongPiernaIz = glmReadOBJ((char*)"models/among us/PiernaIz.obj");
 	fallguys = glmReadOBJ((char*)"models/fallguys/FallGuysD.obj");
 	//////////////////////
+
+
 
 	glutMainLoop();
 	return 0;
