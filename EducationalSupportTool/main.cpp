@@ -13,9 +13,6 @@ static float ypoz = 0;
 
 int main_window;
 int genID = 1;
-int contNivel = 0;
-
-
 
 //Cords Personaje Principal
 
