@@ -555,32 +555,40 @@ void myControl_SumaLvL1(int control) {
 		gluiCongrulation->add_statictext("Felicidades, acabas de resolver bien la suma, sigue así!");
 		gluiCongrulation->add_statictext(" ");
 		gluiCongrulation->add_button("Aceptar", 0, myControl_Button);
+
+		gluiCongrulation->set_main_gfx_window(main_window);
 		break;
 
 	case 1:
 		gluiSumaLvL1->close();
 		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_button("Aceptar", 1, myControl_Button);
+
+		gluiFail->set_main_gfx_window(main_window);
 		break;
 
 	case 2:
 		gluiSumaLvL1->close();
 		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_button("Aceptar", 2, myControl_Button);
-		
+
+		gluiFail->set_main_gfx_window(main_window);
+		break;
 	case 3:
 		gluiSumaLvL1->close();
 		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_button("Aceptar", 3, myControl_Button);
+
+		gluiFail->set_main_gfx_window(main_window);
 		break;
 	}
 }
@@ -595,32 +603,37 @@ void myControl_RestaLvL1(int control) {
 		gluiCongrulation->add_statictext("Felicidades, acabas de resolver bien la resta, sigue así!");
 		gluiCongrulation->add_statictext(" ");
 		gluiCongrulation->add_button("Aceptar", 0, myControl_Button);
+		gluiCongrulation->set_main_gfx_window(main_window);
 		break;
 
 	case 1:
 		gluiRestaLvL1->close();
 		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_button("Aceptar", 1, myControl_Button);
+
+		gluiFail->set_main_gfx_window(main_window);
 		break;
 
 	case 2:
 		gluiRestaLvL1->close();
 		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_button("Aceptar", 2, myControl_Button);
+		gluiFail->set_main_gfx_window(main_window);
 
 	case 3:
 		gluiRestaLvL1->close();
 		gluiFail = GLUI_Master.create_glui("Muy mal", 0, 800, 500);
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_statictext("Respuesta incorrecta, vuelve a intentarlo.");
-		gluiCongrulation->add_statictext(" ");
+		gluiFail->add_statictext(" ");
 		gluiFail->add_button("Aceptar", 3, myControl_Button);
+		gluiFail->set_main_gfx_window(main_window);
 		break;
 	}
 }
